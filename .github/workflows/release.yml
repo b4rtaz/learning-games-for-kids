@@ -1,0 +1,41 @@
+name: release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 22
+      - name: Prepare
+        run: |
+            mkdir _deploy
+            mkdir _deploy/assets
+            mkdir _deploy/letter-jump
+            cp -R assets/* _deploy/assets/
+            cp -R letter-jump/* _deploy/letter-jump/
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _deploy
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
