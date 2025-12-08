@@ -1,3 +1,7 @@
 # Learning Games for Kids
 
-This is a simple repository containing educational games for children, mostly vibe coded.
+This is a simple repository containing free educational games for children, mostly vibe coded.
+
+## Available Games
+
+* [🐤 Letter Jump](https://b4rtaz.github.io/learning-games-for-kids/letter-jump/) - A game to help kids learn letters by jumping on them (English, Polish).
