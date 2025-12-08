@@ -578,11 +578,15 @@ function positionChick() {
     if (currentPlatform && chickContainer) {
         const platformRect = currentPlatform.getBoundingClientRect();
         const displayRect = document.getElementById('wordDisplay').getBoundingClientRect();
-        
-        chickContainer.style.left = (platformRect.left - displayRect.left + platformRect.width/2 - 30) + 'px';
-        // Adjust bottom position based on platform size
-        const bottomOffset = window.innerWidth <= 480 ? 70 : (window.innerWidth <= 768 ? 100 : 130);
-        chickContainer.style.bottom = bottomOffset + 'px';
+        const chickWidth = chickContainer.offsetWidth || 60;
+        const chickHeight = chickContainer.offsetHeight || 55;
+        // Center horizontally over the target platform
+        chickContainer.style.left = (platformRect.left - displayRect.left + (platformRect.width - chickWidth) / 2) + 'px';
+        // Place the chick so its feet sit just inside the top of the platform, even when wrapped to new rows
+        const perchOffset = Math.min(platformRect.height * 0.12, 12);
+        const chickTop = (platformRect.top - displayRect.top) + perchOffset - chickHeight;
+        chickContainer.style.top = `${chickTop}px`;
+        chickContainer.style.bottom = 'auto';
     }
 }
 
