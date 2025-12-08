@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🐤 Letter Jump - Learn to Type!</title>
+    <link rel="stylesheet" href="./css.css" />
+</head>
+<body>
+    <div class="start-screen" id="startScreen">
+        <h1>Letter Jump!</h1>
+        <div class="chick" style="transform: scale(2); margin-bottom: 40px;">
+            <div class="chick-body">
+                <div class="chick-belly"></div>
+                <div class="chick-eye left"></div>
+                <div class="chick-eye right"></div>
+                <div class="chick-beak"></div>
+                <div class="chick-cheek left"></div>
+                <div class="chick-cheek right"></div>
+            </div>
+            <div class="chick-wing left"></div>
+            <div class="chick-wing right"></div>
+            <div class="chick-feet">
+                <div class="chick-foot"></div>
+                <div class="chick-foot"></div>
+            </div>
+        </div>
+        <p id="startLangLabel" style="font-size: 24px; color: #333; margin-bottom: 12px;">Choose your language:</p>
+        <div class="language-buttons">
+            <button class="lang-btn polish" id="langPolish" onclick="selectLanguage('polish')">🇵🇱 Polski</button>
+            <button class="lang-btn english" id="langEnglish" onclick="selectLanguage('english')">🇬🇧 English</button>
+        </div>
+        <p id="startModeLabel" style="font-size: 22px; color: #333; margin: 20px 0 12px;">Choose a mode:</p>
+        <div class="mode-buttons">
+            <button class="mode-btn" id="modeLetters" onclick="selectMode('letters')">Letters</button>
+            <button class="mode-btn" id="modeDigits" onclick="selectMode('digits')">Digits</button>
+            <button class="mode-btn" id="modeMixed" onclick="selectMode('mixed')">Mixed</button>
+        </div>
+        <button class="start-btn" id="startBtn" onclick="startGame()">Start!</button>
+        <p style="font-size: 12px; color: #333; margin-top: 24px;">by b4rtaz</p>
+    </div>
+
+    <div class="sky-background" id="skyBg"></div>
+    
+    <!-- Hidden input for mobile keyboard -->
+    <input type="text" class="mobile-input" id="mobileInput" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false">
+    
+    <button class="sound-toggle" id="soundToggle" onclick="toggleSound()">🔊 Sound ON</button>
+    <button class="keyboard-toggle" id="keyboardToggle" onclick="toggleKeyboard()">⌨️ Show Keyboard</button>
+    <button class="home-button" id="homeButton" onclick="goHome()">🏠 Menu</button>
+    <div class="level-indicator"><span id="levelLabel">Word</span>: <span id="level">1</span>/<span id="levelTotal">10</span></div>
+    
+    <div class="height-meter">
+        <div class="height-fill" id="heightFill"></div>
+    </div>
+
+    <div class="game-container" id="gameContainer">
+        <div class="word-display" id="wordDisplay"></div>
+    </div>
+
+    <div class="celebration" id="celebration">⭐ GREAT! ⭐</div>
+    <div class="confetti-screen" id="confettiScreen"></div>
+    
+    <div class="instructions" id="instructionsText">Type the highlighted letter!</div>
+    <div class="tap-hint" id="tapHint">👆 Tap here to type!</div>
+    <div class="on-screen-keyboard" id="onScreenKeyboard"></div>
+    <div class="finish-screen" id="finishScreen">
+        <div class="finish-card">
+            <div class="finish-title" id="finishTitle">🎉 GREAT JOB! 🎉</div>
+            <button class="finish-button" onclick="restartGame()">Play Again</button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
