@@ -30,8 +30,10 @@ jobs:
             mkdir _deploy
             mkdir _deploy/assets
             mkdir _deploy/letter-jump
+            mkdir _deploy/keyboard-puzzle
             cp -R assets/* _deploy/assets/
             cp -R letter-jump/* _deploy/letter-jump/
+            cp -R keyboard-puzzle/* _deploy/keyboard-puzzle/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
