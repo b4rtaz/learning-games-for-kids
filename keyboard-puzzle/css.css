@@ -432,6 +432,15 @@ body {
     object-fit: cover;
 }
 
+.image-btn .random-icon {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 22px);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
 .image-btn .image-name {
     position: absolute;
     bottom: 0;

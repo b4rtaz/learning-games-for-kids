@@ -33,42 +33,54 @@ function getCharacters() {
     return currentLanguage === 'polish' ? CHARACTERS_POLISH : CHARACTERS_ENGLISH;
 }
 
+function getImageName(img) {
+    const lang = currentLanguage === 'polish' ? 'pl' : 'en';
+    return img.name[lang] || img.name.en;
+}
+
 // Child-friendly images - Animals only
 const IMAGES = [
-    { id: 'lion', name: '🦁 Lion', url: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&h=640&fit=crop' },
-    { id: 'panda', name: '🐼 Panda', url: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800&h=640&fit=crop' },
-    { id: 'elephant', name: '🐘 Elephant', url: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=800&h=640&fit=crop' },
-    { id: 'dolphin', name: '🐬 Dolphin', url: 'https://images.unsplash.com/photo-1607153333879-c174d265f1d2?w=800&h=640&fit=crop' },
-    { id: 'butterfly', name: '🦋 Butterfly', url: 'https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=800&h=640&fit=crop' },
-    { id: 'puppy', name: '🐕 Puppy', url: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=640&fit=crop' },
-    { id: 'kitten', name: '🐱 Kitten', url: 'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&h=640&fit=crop' },
-    { id: 'parrot', name: '🦜 Parrot', url: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&h=640&fit=crop' },
-    { id: 'turtle', name: '🐢 Turtle', url: 'https://images.unsplash.com/photo-1518467166778-b88f373ffec7?w=800&h=640&fit=crop' },
-    { id: 'penguin', name: '🐧 Penguin', url: 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=800&h=640&fit=crop' },
-    { id: 'fox', name: '🦊 Fox', url: 'https://images.unsplash.com/photo-1516934024742-b461fba47600?w=800&h=640&fit=crop' },
-    { id: 'owl', name: '🦉 Owl', url: 'https://images.unsplash.com/photo-1543549790-8b5f4a028cfb?w=800&h=640&fit=crop' },
-    { id: 'rabbit', name: '🐰 Rabbit', url: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=800&h=640&fit=crop' },
-    { id: 'giraffe', name: '🦒 Giraffe', url: 'https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=800&h=640&fit=crop' },
-    { id: 'zebra', name: '🦓 Zebra', url: 'https://images.unsplash.com/photo-1501706362039-c06b2d715385?w=800&h=640&fit=crop' },
-    { id: 'koala', name: '🐨 Koala', url: 'https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?w=800&h=640&fit=crop' },
-    { id: 'flamingo', name: '🦩 Flamingo', url: 'https://images.unsplash.com/photo-1497206365907-f5e630693df0?w=800&h=640&fit=crop' },
-    { id: 'peacock', name: '🦚 Peacock', url: 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=800&h=640&fit=crop' },
-    { id: 'tiger', name: '🐅 Tiger', url: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=800&h=640&fit=crop' },
-    { id: 'bear', name: '🐻 Bear', url: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=800&h=640&fit=crop' },
-    { id: 'deer', name: '🦌 Deer', url: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800&h=640&fit=crop' },
-    { id: 'monkey', name: '🐒 Monkey', url: 'https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=800&h=640&fit=crop' },
-    { id: 'horse', name: '🐴 Horse', url: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&h=640&fit=crop' },
-    { id: 'frog', name: '🐸 Frog', url: 'https://images.unsplash.com/photo-1474314170901-f351b68f544f?w=800&h=640&fit=crop' },
-    { id: 'hedgehog', name: '🦔 Hedgehog', url: 'https://images.unsplash.com/photo-1446292267125-fecb4ecbf1a5?w=800&h=640&fit=crop' },
-    { id: 'squirrel', name: '🐿️ Squirrel', url: 'https://images.unsplash.com/photo-1507666405895-422eee7d517f?w=800&h=640&fit=crop' },
-    { id: 'cat', name: '🐈 Cat', url: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&h=640&fit=crop' },
-    { id: 'hamster', name: '🐹 Hamster', url: 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=800&h=640&fit=crop' },
-    { id: 'duck', name: '🦆 Duck', url: 'https://images.unsplash.com/photo-1459682687441-7761439a709d?w=800&h=640&fit=crop' },
-    { id: 'goldfish', name: '🐠 Fish', url: 'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=800&h=640&fit=crop' },
+    { id: 'lion', name: { en: '🦁 Lion', pl: '🦁 Lew' }, url: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&h=640&fit=crop' },
+    { id: 'panda', name: { en: '🐼 Panda', pl: '🐼 Panda' }, url: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800&h=640&fit=crop' },
+    { id: 'elephant', name: { en: '🐘 Elephant', pl: '🐘 Słoń' }, url: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=800&h=640&fit=crop' },
+    { id: 'dolphin', name: { en: '🐬 Dolphin', pl: '🐬 Delfin' }, url: 'https://images.unsplash.com/photo-1607153333879-c174d265f1d2?w=800&h=640&fit=crop' },
+    { id: 'butterfly', name: { en: '🦋 Butterfly', pl: '🦋 Motyl' }, url: 'https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=800&h=640&fit=crop' },
+    { id: 'puppy', name: { en: '🐕 Puppy', pl: '🐕 Szczeniak' }, url: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=640&fit=crop' },
+    { id: 'kitten', name: { en: '🐱 Kitten', pl: '🐱 Kotek' }, url: 'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&h=640&fit=crop' },
+    { id: 'parrot', name: { en: '🦜 Parrot', pl: '🦜 Papuga' }, url: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&h=640&fit=crop' },
+    { id: 'turtle', name: { en: '🐢 Turtle', pl: '🐢 Żółw' }, url: 'https://images.unsplash.com/photo-1518467166778-b88f373ffec7?w=800&h=640&fit=crop' },
+    { id: 'penguin', name: { en: '🐧 Penguin', pl: '🐧 Pingwin' }, url: 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=800&h=640&fit=crop' },
+    { id: 'fox', name: { en: '🦊 Fox', pl: '🦊 Lis' }, url: 'https://images.unsplash.com/photo-1516934024742-b461fba47600?w=800&h=640&fit=crop' },
+    { id: 'owl', name: { en: '🦉 Owl', pl: '🦉 Sowa' }, url: 'https://images.unsplash.com/photo-1543549790-8b5f4a028cfb?w=800&h=640&fit=crop' },
+    { id: 'rabbit', name: { en: '🐰 Rabbit', pl: '🐰 Królik' }, url: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=800&h=640&fit=crop' },
+    { id: 'giraffe', name: { en: '🦒 Giraffe', pl: '🦒 Żyrafa' }, url: 'https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=800&h=640&fit=crop' },
+    { id: 'zebra', name: { en: '🦓 Zebra', pl: '🦓 Zebra' }, url: 'https://images.unsplash.com/photo-1501706362039-c06b2d715385?w=800&h=640&fit=crop' },
+    { id: 'koala', name: { en: '🐨 Koala', pl: '🐨 Koala' }, url: 'https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?w=800&h=640&fit=crop' },
+    { id: 'flamingo', name: { en: '🦩 Flamingo', pl: '🦩 Flaming' }, url: 'https://images.unsplash.com/photo-1497206365907-f5e630693df0?w=800&h=640&fit=crop' },
+    { id: 'peacock', name: { en: '🦚 Peacock', pl: '🦚 Paw' }, url: 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=800&h=640&fit=crop' },
+    { id: 'tiger', name: { en: '🐅 Tiger', pl: '🐅 Tygrys' }, url: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=800&h=640&fit=crop' },
+    { id: 'bear', name: { en: '🐻 Bear', pl: '🐻 Niedźwiedź' }, url: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=800&h=640&fit=crop' },
+    { id: 'deer', name: { en: '🦌 Deer', pl: '🦌 Jeleń' }, url: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800&h=640&fit=crop' },
+    { id: 'monkey', name: { en: '🐒 Monkey', pl: '🐒 Małpa' }, url: 'https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=800&h=640&fit=crop' },
+    { id: 'horse', name: { en: '🐴 Horse', pl: '🐴 Koń' }, url: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&h=640&fit=crop' },
+    { id: 'frog', name: { en: '🐸 Frog', pl: '🐸 Żaba' }, url: 'https://images.unsplash.com/photo-1474314170901-f351b68f544f?w=800&h=640&fit=crop' },
+    { id: 'hedgehog', name: { en: '🦔 Hedgehog', pl: '🦔 Jeż' }, url: 'https://images.unsplash.com/photo-1446292267125-fecb4ecbf1a5?w=800&h=640&fit=crop' },
+    { id: 'squirrel', name: { en: '🐿️ Squirrel', pl: '🐿️ Wiewiórka' }, url: 'https://images.unsplash.com/photo-1507666405895-422eee7d517f?w=800&h=640&fit=crop' },
+    { id: 'cat', name: { en: '🐈 Cat', pl: '🐈 Kot' }, url: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&h=640&fit=crop' },
+    { id: 'hamster', name: { en: '🐹 Hamster', pl: '🐹 Chomik' }, url: 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=800&h=640&fit=crop' },
+    { id: 'duck', name: { en: '🦆 Duck', pl: '🦆 Kaczka' }, url: 'https://images.unsplash.com/photo-1459682687441-7761439a709d?w=800&h=640&fit=crop' },
+    { id: 'goldfish', name: { en: '🐠 Fish', pl: '🐠 Ryba' }, url: 'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=800&h=640&fit=crop' },
 ];
 
-let currentLanguage = 'english';
+// Detect browser language - Polish if 'pl', otherwise English
+function detectLanguage() {
+    const browserLang = navigator.language || navigator.userLanguage || 'en';
+    return browserLang.toLowerCase().startsWith('pl') ? 'polish' : 'english';
+}
+
+let currentLanguage = detectLanguage();
 let selectedImage = IMAGES[0];
+let randomImageMode = true; // Default to random
 let puzzlePieces = [];
 let currentPieceIndex = 0;
 let soundEnabled = true;
@@ -91,7 +103,8 @@ const UI_TEXT = {
         startLangLabel: 'Choose your language:',
         startImageLabel: 'Choose an image:',
         startSizeLabel: 'Choose grid size:',
-        startButton: 'Start!'
+        startButton: 'Start!',
+        randomImage: 'Random'
     },
     polish: {
         progressLabel: 'Postęp',
@@ -108,7 +121,8 @@ const UI_TEXT = {
         startLangLabel: 'Wybierz język:',
         startImageLabel: 'Wybierz obrazek:',
         startSizeLabel: 'Wybierz rozmiar:',
-        startButton: 'Start!'
+        startButton: 'Start!',
+        randomImage: 'Losuj'
     }
 };
 
@@ -560,14 +574,27 @@ function selectLanguage(lang) {
     if (englishBtn) englishBtn.classList.toggle('active', lang === 'english');
     
     updateStartScreenStrings();
+    renderImageButtons(); // Re-render with translated names
 }
 
 function selectImage(imageId) {
+    randomImageMode = false;
     selectedImage = IMAGES.find(img => img.id === imageId) || IMAGES[0];
     
     document.querySelectorAll('.image-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.imageId === imageId);
     });
+    document.getElementById('randomImageBtn')?.classList.remove('active');
+}
+
+function selectRandomImage() {
+    randomImageMode = true;
+    selectedImage = IMAGES[Math.floor(Math.random() * IMAGES.length)];
+    
+    document.querySelectorAll('.image-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.getElementById('randomImageBtn')?.classList.add('active');
 }
 
 function updateStartScreenStrings() {
@@ -611,20 +638,41 @@ function renderImageButtons() {
     const container = document.getElementById('imageButtons');
     container.innerHTML = '';
     
-    IMAGES.forEach((img, index) => {
+    const t = getUIText();
+    
+    // Add Random button first
+    const randomBtn = document.createElement('button');
+    randomBtn.className = 'image-btn random-btn' + (randomImageMode ? ' active' : '');
+    randomBtn.id = 'randomImageBtn';
+    randomBtn.onclick = () => selectRandomImage();
+    
+    const randomIcon = document.createElement('div');
+    randomIcon.className = 'random-icon';
+    randomIcon.textContent = '🎲';
+    
+    const randomName = document.createElement('span');
+    randomName.className = 'image-name';
+    randomName.textContent = t.randomImage;
+    
+    randomBtn.appendChild(randomIcon);
+    randomBtn.appendChild(randomName);
+    container.appendChild(randomBtn);
+    
+    // Add specific image buttons
+    IMAGES.forEach((img) => {
         const btn = document.createElement('button');
-        btn.className = 'image-btn' + (index === 0 ? ' active' : '');
+        btn.className = 'image-btn' + (!randomImageMode && selectedImage.id === img.id ? ' active' : '');
         btn.dataset.imageId = img.id;
         btn.onclick = () => selectImage(img.id);
         
         const imgEl = document.createElement('img');
         imgEl.src = img.url;
-        imgEl.alt = img.name;
+        imgEl.alt = getImageName(img);
         imgEl.loading = 'lazy';
         
         const nameEl = document.createElement('span');
         nameEl.className = 'image-name';
-        nameEl.textContent = img.name;
+        nameEl.textContent = getImageName(img);
         
         btn.appendChild(imgEl);
         btn.appendChild(nameEl);
@@ -634,6 +682,12 @@ function renderImageButtons() {
 
 function startGame() {
     preloadLetterSounds();
+    
+    // If random mode, pick a random image now
+    if (randomImageMode) {
+        selectedImage = IMAGES[Math.floor(Math.random() * IMAGES.length)];
+    }
+    
     generatePuzzlePieces();
     
     document.getElementById('startScreen').style.display = 'none';
@@ -679,7 +733,25 @@ function hideFinishScreen() {
 
 function restartGame() {
     hideFinishScreen();
-    startGame();
+    
+    // Always pick a random different image on replay
+    const otherImages = IMAGES.filter(img => img.id !== selectedImage.id);
+    selectedImage = otherImages[Math.floor(Math.random() * otherImages.length)];
+    
+    generatePuzzlePieces();
+    
+    // Set the background image
+    document.getElementById('backgroundImage').src = selectedImage.url;
+    
+    gameStarted = true;
+    currentPieceIndex = 0;
+    
+    document.getElementById('progressTotal').textContent = TOTAL_PIECES;
+    updateProgress();
+    updateBackground();
+    updateUIStrings();
+    
+    renderPuzzleGrid();
 }
 
 function goHome() {
