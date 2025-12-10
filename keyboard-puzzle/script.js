@@ -104,7 +104,8 @@ const UI_TEXT = {
         startImageLabel: 'Choose an image:',
         startSizeLabel: 'Choose grid size:',
         startButton: 'Start!',
-        randomImage: 'Random'
+        randomImage: '? Random',
+        scrollHint: '← Scroll to see more →'
     },
     polish: {
         progressLabel: 'Postęp',
@@ -122,7 +123,8 @@ const UI_TEXT = {
         startImageLabel: 'Wybierz obrazek:',
         startSizeLabel: 'Wybierz rozmiar:',
         startButton: 'Start!',
-        randomImage: 'Losuj'
+        randomImage: '? Losowy',
+        scrollHint: '← Przewiń, aby zobaczyć więcej →'
     }
 };
 
@@ -604,11 +606,13 @@ function updateStartScreenStrings() {
     const imageLabel = document.getElementById('startImageLabel');
     const sizeLabel = document.getElementById('startSizeLabel');
     const startBtn = document.getElementById('startBtn');
+    const scrollHint = document.getElementById('scrollHint');
     
     if (langLabel) langLabel.textContent = t.startLangLabel;
     if (imageLabel) imageLabel.textContent = t.startImageLabel;
     if (sizeLabel) sizeLabel.textContent = t.startSizeLabel;
     if (startBtn) startBtn.textContent = t.startButton;
+    if (scrollHint) scrollHint.textContent = t.scrollHint;
 }
 
 function selectGridMode(mode) {

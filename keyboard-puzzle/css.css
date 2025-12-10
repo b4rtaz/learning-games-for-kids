@@ -839,8 +839,15 @@ body {
     
     .current-key-display {
         bottom: 180px;
-        font-size: 14px;
-        padding: 8px 15px;
+        font-size: 12px;
+        padding: 6px 12px;
+        gap: 8px;
+    }
+    
+    .current-key {
+        font-size: 18px;
+        padding: 6px 12px;
+        min-width: 40px;
     }
     
     .instructions {
