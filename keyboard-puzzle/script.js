@@ -17,6 +17,18 @@ let TOTAL_PIECES = GRID_COLS * GRID_ROWS;
 const CHARACTERS_ENGLISH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
 const CHARACTERS_POLISH = 'ABCDEFGHIJKLMNOPRSTUWYZ0123456789'.split(''); // No Q, V, X in Polish
 
+// Keyboard layout for on-screen keyboard
+const KEYBOARD_LAYOUT = [
+    ['Q','W','E','R','T','Y','U','I','O','P'],
+    ['A','S','D','F','G','H','J','K','L'],
+    ['Z','X','C','V','B','N','M'],
+    ['0','1','2','3','4','5','6','7','8','9']
+];
+
+// Mobile detection
+let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+let keyboardVisible = isMobile;
+
 function getCharacters() {
     return currentLanguage === 'polish' ? CHARACTERS_POLISH : CHARACTERS_ENGLISH;
 }
@@ -74,6 +86,8 @@ const UI_TEXT = {
         homeButton: 'Menu',
         soundOn: '🔊 Sound ON',
         soundOff: '🔇 Sound OFF',
+        keyboardShow: '⌨️ Show Keyboard',
+        keyboardHide: '⌨️ Hide Keyboard',
         startLangLabel: 'Choose your language:',
         startImageLabel: 'Choose an image:',
         startSizeLabel: 'Choose grid size:',
@@ -89,6 +103,8 @@ const UI_TEXT = {
         homeButton: 'Menu',
         soundOn: '🔊 Dźwięk WŁ',
         soundOff: '🔇 Dźwięk WYŁ',
+        keyboardShow: '⌨️ Pokaż klawiaturę',
+        keyboardHide: '⌨️ Ukryj klawiaturę',
         startLangLabel: 'Wybierz język:',
         startImageLabel: 'Wybierz obrazek:',
         startSizeLabel: 'Wybierz rozmiar:',
@@ -378,7 +394,11 @@ function handleKeyPress(e) {
     if (e.repeat) return;
     
     const key = e.key.toUpperCase();
-    
+    processKey(key);
+}
+
+// Process a key (from physical or virtual keyboard)
+function processKey(key) {
     // Only handle A-Z and 0-9
     if (!/^[A-Z0-9]$/.test(key)) return;
     
@@ -435,6 +455,53 @@ function handleKeyPress(e) {
     }
 }
 
+// Handle virtual keyboard key press
+function handleVirtualKey(symbol) {
+    if (!gameStarted) return;
+    processKey(symbol);
+}
+
+// Render on-screen keyboard
+function renderKeyboard() {
+    const keyboard = document.getElementById('onScreenKeyboard');
+    if (!keyboard) return;
+    keyboard.innerHTML = '';
+    keyboard.style.display = keyboardVisible ? 'flex' : 'none';
+    KEYBOARD_LAYOUT.forEach(row => {
+        const rowEl = document.createElement('div');
+        rowEl.className = 'key-row';
+        row.forEach(symbol => {
+            const btn = document.createElement('button');
+            btn.className = 'key-btn';
+            btn.textContent = symbol;
+            btn.setAttribute('aria-label', symbol);
+            btn.addEventListener('click', () => handleVirtualKey(symbol));
+            rowEl.appendChild(btn);
+        });
+        keyboard.appendChild(rowEl);
+    });
+}
+
+// Update keyboard toggle button
+function updateKeyboardButton() {
+    const t = getUIText();
+    const btn = document.getElementById('keyboardToggle');
+    if (btn) {
+        btn.textContent = keyboardVisible ? t.keyboardHide : t.keyboardShow;
+        btn.style.display = isMobile ? 'none' : 'block';
+    }
+    const keyboard = document.getElementById('onScreenKeyboard');
+    if (keyboard) {
+        keyboard.style.display = keyboardVisible ? 'flex' : 'none';
+    }
+}
+
+// Toggle keyboard visibility
+function toggleKeyboard() {
+    keyboardVisible = !keyboardVisible;
+    updateKeyboardButton();
+}
+
 // Game complete
 function gameComplete() {
     playSuccessSound();
@@ -467,6 +534,7 @@ function updateUIStrings() {
     if (homeBtn) homeBtn.textContent = `🏠 ${t.homeButton}`;
     
     updateSoundButton();
+    updateKeyboardButton();
 }
 
 function updateSoundButton() {
@@ -633,6 +701,8 @@ document.addEventListener('keydown', handleKeyPress);
 setupConfetti();
 renderImageButtons();
 renderSizeButtons();
+renderKeyboard();
+updateKeyboardButton();
 selectLanguage(currentLanguage);
 updateStartScreenStrings();
 hideFinishScreen();

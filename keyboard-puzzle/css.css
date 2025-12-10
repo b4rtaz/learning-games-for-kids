@@ -263,17 +263,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     z-index: 2000;
     overflow-y: auto;
     padding: 20px;
+    padding-top: 30px;
 }
 
 .start-screen h1 {
     font-size: 56px;
     color: #FFE66D;
     text-shadow: 4px 4px 0 #FF6B6B;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .puzzle-icon {
@@ -413,8 +414,8 @@ body {
 
 .image-btn {
     flex: 0 0 auto;
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border: 4px solid transparent;
     border-radius: 15px;
     cursor: pointer;
@@ -436,10 +437,10 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.75);
     color: white;
-    font-size: 10px;
-    padding: 3px 2px;
+    font-size: 11px;
+    padding: 4px 3px;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -618,6 +619,12 @@ body {
 }
 
 @media (max-width: 600px) {
+    .start-screen {
+        padding: 10px;
+        padding-top: 15px;
+        justify-content: flex-start;
+    }
+    
     .puzzle-board {
         max-width: 95vw;
     }
@@ -627,26 +634,66 @@ body {
     }
 
     .start-screen h1 {
-        font-size: 36px;
+        font-size: 24px;
+        margin-bottom: 5px;
     }
 
     .puzzle-icon {
-        font-size: 50px;
+        font-size: 35px;
+        margin-bottom: 8px;
+    }
+    
+    .start-screen p {
+        font-size: 12px !important;
+        margin: 5px 0 !important;
     }
 
     .language-buttons {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        gap: 8px;
+        margin-top: 8px;
     }
 
     .lang-btn {
-        font-size: 18px;
-        padding: 12px 30px;
+        font-size: 12px;
+        padding: 8px 16px;
     }
 
+    .image-selector-container {
+        margin-top: 5px;
+    }
+
+    .image-buttons {
+        padding: 8px;
+        max-width: 95vw;
+        max-height: 85px;
+        gap: 8px;
+    }
+    
     .image-btn {
-        width: 70px;
-        height: 55px;
+        width: 65px;
+        height: 65px;
+    }
+    
+    .image-btn .image-name {
+        font-size: 8px;
+        padding: 2px;
+    }
+    
+    .size-buttons {
+        gap: 6px;
+        margin-top: 8px;
+    }
+    
+    .size-btn {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+    
+    .start-btn {
+        font-size: 18px;
+        padding: 12px 30px;
+        margin-top: 10px;
     }
 
     .progress-indicator {
@@ -664,8 +711,8 @@ body {
     }
 
     .sound-toggle {
-        font-size: 14px;
-        padding: 8px 15px;
+        font-size: 12px;
+        padding: 6px 12px;
     }
 
     .instructions {
@@ -681,5 +728,129 @@ body {
 
     .celebration {
         font-size: 48px;
+    }
+}
+
+/* On-screen Keyboard */
+.on-screen-keyboard {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 640px;
+    width: calc(100% - 20px);
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.key-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+.key-btn {
+    flex: 1 1 0;
+    max-width: 48px;
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #f6ad55 0%, #ed8936 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 0 #c05621, 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.05s ease, box-shadow 0.1s ease;
+}
+
+.key-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #c05621, 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Keyboard Toggle Button */
+.keyboard-toggle {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFE66D;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #F4A261;
+    z-index: 50;
+}
+
+/* Mobile keyboard adjustments */
+@media (max-width: 600px) {
+    .on-screen-keyboard {
+        padding: 8px;
+        gap: 4px;
+        bottom: 5px;
+    }
+    
+    .key-row {
+        gap: 3px;
+    }
+    
+    .key-btn {
+        max-width: 32px;
+        height: 38px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+    
+    .keyboard-toggle {
+        top: 56px;
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    /* Adjust game layout when keyboard is visible */
+    .game-container {
+        height: auto;
+        padding-bottom: 200px;
+    }
+    
+    .puzzle-board {
+        max-height: 45vh;
+    }
+    
+    .current-key-display {
+        bottom: 180px;
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+    
+    .instructions {
+        display: none;
+    }
+    
+    /* Bigger image buttons on mobile for better visibility */
+    .image-buttons {
+        padding: 8px;
+        max-height: 80px;
+    }
+    
+    .image-btn {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .image-btn .image-name {
+        font-size: 8px;
+        padding: 2px;
     }
 }
