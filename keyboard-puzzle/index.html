@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🧩 Keyboard Puzzle - Learn to Type!</title>
+    <link rel="stylesheet" href="./css.css" />
+</head>
+<body>
+    <div class="start-screen" id="startScreen">
+        <h1>Keyboard Puzzle!</h1>
+        <div class="puzzle-icon">🧩</div>
+        <p id="startLangLabel" style="font-size: 24px; color: #333; margin-bottom: 12px;">Choose your language:</p>
+        <div class="language-buttons">
+            <button class="lang-btn polish" id="langPolish" onclick="selectLanguage('polish')">🇵🇱 Polski</button>
+            <button class="lang-btn english" id="langEnglish" onclick="selectLanguage('english')">🇬🇧 English</button>
+        </div>
+        <p id="startImageLabel" style="font-size: 22px; color: #333; margin: 20px 0 12px;">Choose an image:</p>
+        <div class="image-buttons" id="imageButtons">
+            <!-- Images will be populated by JS -->
+        </div>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 8px;">← Scroll to see more →</p>
+        <p id="startSizeLabel" style="font-size: 22px; color: #333; margin: 20px 0 12px;">Choose grid size:</p>
+        <div class="size-buttons" id="sizeButtons">
+            <!-- Size buttons will be populated by JS -->
+        </div>
+        <button class="start-btn" id="startBtn" onclick="startGame()">Start!</button>
+        <p style="font-size: 12px; color: #333; margin-top: 24px;">by b4rtaz</p>
+    </div>
+
+    <div class="game-container" id="gameContainer">
+        <div class="puzzle-board" id="puzzleBoard">
+            <img class="background-image" id="backgroundImage" src="" alt="Hidden image">
+            <div class="puzzles-grid" id="puzzlesGrid"></div>
+        </div>
+    </div>
+
+    <button class="sound-toggle" id="soundToggle" onclick="toggleSound()">🔊 Sound ON</button>
+    <button class="home-button" id="homeButton" onclick="goHome()">🏠 Menu</button>
+    <div class="progress-indicator"><span id="progressLabel">Progress</span>: <span id="progress">0</span>/<span id="progressTotal">80</span></div>
+
+    <div class="current-key-display" id="currentKeyDisplay">
+        <span id="currentKeyLabel">Press:</span>
+        <span class="current-key" id="currentKey">A</span>
+    </div>
+
+    <div class="celebration" id="celebration">⭐ GREAT! ⭐</div>
+    <div class="confetti-screen" id="confettiScreen"></div>
+
+    <div class="instructions" id="instructionsText">Press the highlighted key to uncover a puzzle piece!</div>
+
+    <div class="finish-screen" id="finishScreen">
+        <div class="finish-card">
+            <div class="finish-title" id="finishTitle">🎉 GREAT JOB! 🎉</div>
+            <div class="finish-image-preview" id="finishImagePreview"></div>
+            <button class="finish-button" onclick="restartGame()">Play Again</button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
