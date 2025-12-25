@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🔍 Find Each Other - Keyboard Adventure!</title>
+    <link rel="stylesheet" href="./css.css" />
+</head>
+<body>
+    <!-- Start Screen -->
+    <div class="start-screen" id="startScreen">
+        <h1>Find Each Other!</h1>
+        <div class="characters-preview">
+            <div class="character-icon chick-icon">
+                <div class="chick preview-chick">
+                    <div class="chick-body">
+                        <div class="chick-belly"></div>
+                        <div class="chick-eye left"></div>
+                        <div class="chick-eye right"></div>
+                        <div class="chick-beak"></div>
+                        <div class="chick-cheek left"></div>
+                        <div class="chick-cheek right"></div>
+                    </div>
+                    <div class="chick-wing left"></div>
+                    <div class="chick-wing right"></div>
+                    <div class="chick-feet">
+                        <div class="chick-foot"></div>
+                        <div class="chick-foot"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="heart-icon">💕</span>
+            <div class="character-icon cat-icon">
+                <div class="cat preview-cat">
+                    <div class="cat-ear left"></div>
+                    <div class="cat-ear right"></div>
+                    <div class="cat-body">
+                        <div class="cat-belly"></div>
+                        <div class="cat-eye left"></div>
+                        <div class="cat-eye right"></div>
+                        <div class="cat-nose"></div>
+                        <div class="cat-mouth"></div>
+                        <div class="cat-whisker left top"></div>
+                        <div class="cat-whisker left bottom"></div>
+                        <div class="cat-whisker right top"></div>
+                        <div class="cat-whisker right bottom"></div>
+                        <div class="cat-cheek left"></div>
+                        <div class="cat-cheek right"></div>
+                    </div>
+                    <div class="cat-paw left"></div>
+                    <div class="cat-paw right"></div>
+                    <div class="cat-feet">
+                        <div class="cat-foot"></div>
+                        <div class="cat-foot"></div>
+                    </div>
+                    <div class="cat-tail"></div>
+                </div>
+            </div>
+        </div>
+        <p class="story-text" id="storyText">Two best friends got separated! Help them find each other by typing the letters and numbers!</p>
+        
+        <p id="startLangLabel" style="font-size: 20px; color: #333; margin-bottom: 12px;">Choose your language:</p>
+        <div class="language-buttons">
+            <button class="lang-btn polish" id="langPolish" onclick="selectLanguage('polish')">🇵🇱 Polski</button>
+            <button class="lang-btn english" id="langEnglish" onclick="selectLanguage('english')">🇬🇧 English</button>
+        </div>
+        
+        <p id="startLevelsLabel" style="font-size: 20px; color: #333; margin: 20px 0 12px;">How many levels?</p>
+        <div class="level-buttons">
+            <button class="level-btn" data-levels="1" onclick="selectLevels(1)">1</button>
+            <button class="level-btn active" data-levels="3" onclick="selectLevels(3)">3</button>
+            <button class="level-btn" data-levels="5" onclick="selectLevels(5)">5</button>
+        </div>
+        
+        <p id="startObstaclesLabel" style="font-size: 20px; color: #333; margin: 20px 0 12px;">How many obstacles?</p>
+        <div class="obstacle-buttons">
+            <button class="obstacle-btn" data-obstacles="5" onclick="selectObstacles(5)">5</button>
+            <button class="obstacle-btn active" data-obstacles="10" onclick="selectObstacles(10)">10</button>
+            <button class="obstacle-btn" data-obstacles="15" onclick="selectObstacles(15)">15</button>
+        </div>
+        
+        <button class="start-btn" id="startBtn" onclick="startGame()">Start Adventure!</button>
+        <p style="font-size: 12px; color: #333; margin-top: 24px;">by b4rtaz</p>
+    </div>
+
+    <!-- Game Screen -->
+    <div class="game-container" id="gameContainer">
+        <!-- Sky background -->
+        <div class="sky"></div>
+        
+        <!-- Progress bar at top -->
+        <div class="game-header">
+            <div class="player-info">
+                <span class="current-player-icon" id="currentPlayerIcon">🐥</span>
+                <span class="player-name" id="playerName">Chick</span>
+            </div>
+            <div class="level-info">
+                <span id="levelLabel">Level</span>: <span id="currentLevel">1</span>/<span id="totalLevels">3</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Game world -->
+        <div class="game-world" id="gameWorld">
+            <!-- Parallax backgrounds -->
+            <div class="parallax-bg-far" id="parallaxBgFar">
+                <div class="cloud cloud1">☁️</div>
+                <div class="cloud cloud2">☁️</div>
+                <div class="cloud cloud3">⛅</div>
+                <div class="cloud cloud4">☁️</div>
+                <div class="cloud cloud5">☁️</div>
+                <div class="mountain mountain1">🏔️</div>
+                <div class="mountain mountain2">⛰️</div>
+                <div class="mountain mountain3">🏔️</div>
+            </div>
+            <div class="parallax-bg" id="parallaxBg">
+                <div class="tree tree1">🌲</div>
+                <div class="tree tree2">🌳</div>
+                <div class="tree tree3">🌲</div>
+                <div class="tree tree4">🌳</div>
+                <div class="tree tree5">🌲</div>
+                <div class="tree tree6">🌳</div>
+                <div class="tree tree7">🌲</div>
+                <div class="tree tree8">🌳</div>
+                <div class="bush bush1">🌿</div>
+                <div class="bush bush2">🌿</div>
+                <div class="bush bush3">🌿</div>
+                <div class="bush bush4">🌿</div>
+            </div>
+            
+            <!-- Ground with scrolling -->
+            <div class="ground">
+                <div class="ground-scroll" id="groundScroll">
+                    <div class="grass-patch"></div>
+                </div>
+            </div>
+            
+            <!-- Character -->
+            <div class="character" id="character">
+                <div class="character-sprite chick-sprite" id="characterSprite">
+                    <div class="chick">
+                        <div class="chick-body">
+                            <div class="chick-belly"></div>
+                            <div class="chick-eye left"></div>
+                            <div class="chick-eye right"></div>
+                            <div class="chick-beak"></div>
+                            <div class="chick-cheek left"></div>
+                            <div class="chick-cheek right"></div>
+                        </div>
+                        <div class="chick-wing left"></div>
+                        <div class="chick-wing right"></div>
+                        <div class="chick-feet">
+                            <div class="chick-foot"></div>
+                            <div class="chick-foot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="character-sprite cat-sprite" id="characterSpriteCat" style="display: none;">
+                    <div class="cat">
+                        <div class="cat-ear left"></div>
+                        <div class="cat-ear right"></div>
+                        <div class="cat-body">
+                            <div class="cat-belly"></div>
+                            <div class="cat-eye left"></div>
+                            <div class="cat-eye right"></div>
+                            <div class="cat-nose"></div>
+                            <div class="cat-mouth"></div>
+                            <div class="cat-whisker left top"></div>
+                            <div class="cat-whisker left bottom"></div>
+                            <div class="cat-whisker right top"></div>
+                            <div class="cat-whisker right bottom"></div>
+                            <div class="cat-cheek left"></div>
+                            <div class="cat-cheek right"></div>
+                        </div>
+                        <div class="cat-paw left"></div>
+                        <div class="cat-paw right"></div>
+                        <div class="cat-feet">
+                            <div class="cat-foot"></div>
+                            <div class="cat-foot"></div>
+                        </div>
+                        <div class="cat-tail"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Obstacle -->
+            <div class="obstacle" id="obstacle">
+                <div class="obstacle-letter" id="obstacleLetter">A</div>
+            </div>
+            
+            <!-- Goal flag -->
+            <div class="goal-flag" id="goalFlag">
+                <div class="flag-sprite">
+                    <div class="flag-pole"></div>
+                    <div class="flag-banner">
+                        <div class="flag-star"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current key display -->
+        <div class="current-key-display" id="currentKeyDisplay">
+            <span id="currentKeyLabel">Press:</span>
+            <span class="current-key" id="currentKey">A</span>
+        </div>
+    </div>
+
+    <!-- Level Complete Screen -->
+    <div class="level-complete-screen" id="levelCompleteScreen">
+        <div class="level-complete-card">
+            <div class="level-complete-title" id="levelCompleteTitle">🎉 Level Complete! 🎉</div>
+            <div class="level-complete-character" id="levelCompleteCharacter">🐥</div>
+            <p id="levelCompleteMessage">Great job! Ready for the next level?</p>
+            <button class="continue-btn" id="continueBtn" onclick="continueGame()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Player Switch Screen -->
+    <div class="player-switch-screen" id="playerSwitchScreen">
+        <div class="player-switch-card">
+            <div class="player-switch-title" id="playerSwitchTitle">🔄 Switch Players! 🔄</div>
+            <div class="player-switch-characters">
+                <span class="switch-char done" id="switchChar1">🐥</span>
+                <span class="switch-arrow">➡️</span>
+                <span class="switch-char next" id="switchChar2">🐱</span>
+            </div>
+            <p id="playerSwitchMessage">Now it's Cat's turn to find Chick!</p>
+            <button class="continue-btn" onclick="startNextPlayer()">Let's Go!</button>
+        </div>
+    </div>
+
+    <!-- Reunion Screen -->
+    <div class="reunion-screen" id="reunionScreen">
+        <div class="reunion-background"></div>
+        <div class="reunion-content">
+            <div class="reunion-title" id="reunionTitle">🎊 REUNITED! 🎊</div>
+            <div class="reunion-characters" id="reunionCharacters">
+                <div class="reunion-char chick" id="reunionChick">
+                    <div class="chick reunion-chick">
+                        <div class="chick-body">
+                            <div class="chick-belly"></div>
+                            <div class="chick-eye left"></div>
+                            <div class="chick-eye right"></div>
+                            <div class="chick-beak"></div>
+                            <div class="chick-cheek left"></div>
+                            <div class="chick-cheek right"></div>
+                        </div>
+                        <div class="chick-wing left"></div>
+                        <div class="chick-wing right"></div>
+                        <div class="chick-feet">
+                            <div class="chick-foot"></div>
+                            <div class="chick-foot"></div>
+                        </div>
+                    </div>
+                </div>
+                <span class="reunion-hearts">💕</span>
+                <div class="reunion-char cat" id="reunionCat">
+                    <div class="cat reunion-cat">
+                        <div class="cat-ear left"></div>
+                        <div class="cat-ear right"></div>
+                        <div class="cat-body">
+                            <div class="cat-belly"></div>
+                            <div class="cat-eye left"></div>
+                            <div class="cat-eye right"></div>
+                            <div class="cat-nose"></div>
+                            <div class="cat-mouth"></div>
+                            <div class="cat-whisker left top"></div>
+                            <div class="cat-whisker left bottom"></div>
+                            <div class="cat-whisker right top"></div>
+                            <div class="cat-whisker right bottom"></div>
+                            <div class="cat-cheek left"></div>
+                            <div class="cat-cheek right"></div>
+                        </div>
+                        <div class="cat-paw left"></div>
+                        <div class="cat-paw right"></div>
+                        <div class="cat-feet">
+                            <div class="cat-foot"></div>
+                            <div class="cat-foot"></div>
+                        </div>
+                        <div class="cat-tail"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="reunion-message" id="reunionMessage">The best friends found each other!</p>
+            <button class="play-again-btn" onclick="restartGame()">Play Again!</button>
+        </div>
+        <div class="confetti-container" id="confettiContainer"></div>
+    </div>
+
+    <!-- Sound and controls -->
+    <button class="sound-toggle" id="soundToggle" onclick="toggleSound()">🔊 Sound ON</button>
+    <button class="home-button" id="homeButton" onclick="goHome()">🏠 Menu</button>
+    <button class="keyboard-toggle" id="keyboardToggle" onclick="toggleKeyboard()">⌨️ Show Keyboard</button>
+
+    <!-- On-screen keyboard -->
+    <div class="on-screen-keyboard" id="onScreenKeyboard"></div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
