@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Typing Test</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Comic Sans MS", sans-serif;
+  }
+  #letters {
+    display: flex;
+    gap: 2vmin;
+  }
+  .char {
+    font-size: 30vmin;
+    color: #333;
+    user-select: none;
+    text-transform: uppercase;
+    transition: transform 0.1s ease, color 0.1s ease;
+  }
+</style>
+</head>
+<body>
+  <div id="letters"><div class="char">_</div></div>
+
+  <script>
+    const container = document.getElementById('letters');
+    const maxLetters = 6;
+
+    function playClick() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.value = 600;
+      gain.gain.value = 0.05;
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.1);
+    }
+
+    document.addEventListener('keydown', e => {
+      const char = e.key.length === 1 ? e.key : '';
+      if (!char) return;
+
+      const div = document.createElement('div');
+      div.className = 'char';
+      div.textContent = char.toUpperCase();
+      div.style.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+      container.appendChild(div);
+
+      // animation
+      div.style.transform = 'scale(1.2)';
+      setTimeout(() => div.style.transform = 'scale(1)', 100);
+
+      // trim to last 6
+      while (container.children.length > maxLetters) {
+        container.removeChild(container.firstChild);
+      }
+
+      playClick();
+    });
+  </script>
+</body>
+</html>

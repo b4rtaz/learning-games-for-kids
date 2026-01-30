@@ -32,10 +32,12 @@ jobs:
             mkdir _deploy/letter-jump
             mkdir _deploy/keyboard-puzzle
             mkdir _deploy/find-each-other
+            mkdir _deploy/typing-test
             cp -R assets/* _deploy/assets/
             cp -R letter-jump/* _deploy/letter-jump/
             cp -R keyboard-puzzle/* _deploy/keyboard-puzzle/
             cp -R find-each-other/* _deploy/find-each-other/
+            cp -R typing-test/* _deploy/typing-test/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
