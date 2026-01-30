@@ -10,4 +10,4 @@ This is a simple repository containing free educational games for children, most
 
 ## Playground
 
-* [🎹 Typing Test](https://b4rtaz.github.io/learning-games-for-kids/typing-test/)
+* [🎹 Typing Test](https://b4rtaz.github.io/learning-games-for-kids/typing-test/) - A simple typing test app that displays the last few keys you press on the screen in large letters.
