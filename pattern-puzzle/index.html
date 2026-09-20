@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#5b4bd8">
+    <title>Pattern Puzzle - Think and Type!</title>
+    <link rel="stylesheet" href="./css.css">
+</head>
+<body>
+    <main>
+        <section class="screen start-screen" id="startScreen">
+            <div class="start-card">
+                <div class="logo" aria-hidden="true">
+                    <span class="logo-shape circle"></span>
+                    <span class="logo-shape square"></span>
+                    <span class="logo-shape triangle"></span>
+                    <span class="logo-question">?</span>
+                </div>
+                <h1 id="gameTitle">Pattern Puzzle</h1>
+                <p class="intro" id="gameIntro">Find what comes next, then type the letter on the correct answer.</p>
+
+                <p class="section-label" id="languageLabel">Choose your language:</p>
+                <div class="language-buttons">
+                    <button class="lang-btn polish" id="langPolish" type="button">🇵🇱 Polski</button>
+                    <button class="lang-btn english" id="langEnglish" type="button">🇬🇧 English</button>
+                </div>
+
+                <button class="primary-button" id="startButton" type="button">Start 10 rounds</button>
+                <p class="credit">by b4rtaz</p>
+            </div>
+        </section>
+
+        <section class="screen game-screen" id="gameScreen" hidden>
+            <header class="game-header">
+                <div class="progress-copy"><span id="roundLabel">Round</span> <strong id="roundNumber">1</strong>/<span id="roundTotal">10</span></div>
+                <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+                <button class="small-button sound-button" id="soundButton" type="button">🔊 Sound on</button>
+                <button class="small-button menu-button" id="menuButton" type="button">⌂ Menu</button>
+            </header>
+
+            <div class="game-content">
+                <h2 id="questionText">What comes next?</h2>
+                <p class="keyboard-hint" id="keyboardHint">Type the letter on the correct card</p>
+
+                <div class="sequence-row" id="sequenceRow" aria-label="Pattern sequence"></div>
+                <div class="connector" aria-hidden="true">↓</div>
+                <div class="answers-row" id="answersRow" aria-label="Answer choices"></div>
+                <div class="feedback" id="feedback" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section class="screen finish-screen" id="finishScreen" hidden>
+            <div class="finish-card">
+                <div class="finish-stars" aria-hidden="true">⭐ 🧠 ⭐</div>
+                <h1 id="finishTitle">Great thinking!</h1>
+                <p class="score-line"><strong id="scoreValue">10</strong><span id="scoreOutOf">/10 correct on the first try</span></p>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-icon">🎯</span>
+                        <strong id="accuracyValue">100%</strong>
+                        <span id="accuracyLabel">Accuracy</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-icon">⌨️</span>
+                        <strong id="mistakesValue">0</strong>
+                        <span id="mistakesLabel">Wrong keys</span>
+                    </div>
+                </div>
+                <p class="finish-message" id="finishMessage">You spotted every pattern!</p>
+                <button class="primary-button" id="restartButton" type="button">Play again</button>
+                <button class="text-button" id="finishMenuButton" type="button">Back to menu</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+    <script src="./patterns.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
